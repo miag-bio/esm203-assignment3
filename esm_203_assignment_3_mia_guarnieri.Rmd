@@ -87,7 +87,7 @@ ggplot(massbal) +
   ggtitle("Inflow and outflow of California groundwater 2000 - 2050")
 ```
 
-**Figure 1:** A linear trend fitted for input and output flows (in 10$^9$ m$^3$) in California groundwater storage from 2000 to 2025. Input (or inflow) of water steadily decreases from 2000 to 2025, while output (or outflow) steadily increases.
+**Figure 1:** A linear trend fitted for input and output flows (in 10$^9$ m$^3$) in California groundwater storage from 2000 to 2025. Input (or inflow) of water steadily decreases from 2000 to 2025, while output (or outflow) steadily increases. Data: Curmi et al. 2013.
 
 ```{r}
 # can do mass balance for each year to see the changes 
@@ -97,15 +97,13 @@ ggplot(massbal) +
   xlab("Year") + 
   ylab(TeX("Change in groundwater ($10^9$ $m^3$)")) +
   ggtitle("Net groundwater flow in California from 2000 to 2050")
-```
 
-```{r, results = FALSE}
 # can also get the linear model of the change each year
-lm(c(chng00, chng50) ~ year)
+lm_change_per_year <- lm(c(chng00, chng50) ~ year)
 massbal$chnge_lm <- -0.226*massbal$years + 446.6
 ```
 
-**Figure 2:** The predicted change in California groundwater flow (inflow of water - outflow of water) in 10$^9$ m$^3$ for the years 2000 to 2050. Net flow (y axis) is negative due to outflow being greater than inflow.
+**Figure 2:** The predicted change in California groundwater flow (inflow of water - outflow of water) in 10$^9$ m$^3$ for the years 2000 to 2050. Net flow (y axis) is negative due to outflow being greater than inflow. Groundwater will decrease by `r lm_change_per_year$coefficients[2]*-10` 10$^9$ m$^3$ every ten years. Data: Curmi et al. 2013.
 
 ### Takeaway
 
@@ -147,7 +145,7 @@ ggplot(massbal) +
 
 ```
 
-**Figure 3:** This graph shows change in groundwater storage (10$^9$ m$^3$) from 2000 to 2050 under three conditions for groundwater availability: low (lower dashed line, 190 x 10$^9$ m$^3$), expected (middle solid line, 350 x 10$^9$ m$^3$), and high (upper dashed line, 550 x 10$^9$ m$^3$). Groundwater storage at or below zero is shaded in red.
+**Figure 3:** This graph shows change in groundwater storage (10$^9$ m$^3$) from 2000 to 2050 under three conditions for groundwater availability: low (lower dashed line, 190 x 10$^9$ m$^3$), expected (middle solid line, 350 x 10$^9$ m$^3$), and high (upper dashed line, 550 x 10$^9$ m$^3$). Groundwater storage at or below zero is shaded in red. Data: Curmi et al. 2013.
 
 ### Takeaway
 
