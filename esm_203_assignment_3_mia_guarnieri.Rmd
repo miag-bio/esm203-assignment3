@@ -16,7 +16,7 @@ library(latex2exp)
 
 # Overview
 
-This memo assesses the resilience of California groundwater stocks in the face of increasing demand and declining recharge rate by analyzing the mass balance of total groundwater resources for California for the period of 2000 to 2050. The actual amount of groundwater within California is very difficult to measure, so to get a sense of water availability this report utilizes inflow and outflow data (water replenishment and water withdrawal, respectively).
+This memo assesses the resilience of California groundwater stocks in the face of increasing demand and declining recharge rate by analyzing the mass balance of total groundwater resources for California for the period of 2000 to 2050. The actual amount of groundwater within California is very difficult to measure, so to get a sense of water availability this report utilizes inflow and outflow data (groundwater recharge and discharge, respectively). Groundwater recharge occurs when water is added to groundwater sources via infiltration from rain or other surface water sources. Groundwater discharge refers to water exiting the reservoir, typically for human use such as irrigation and industry.
 
 # Data
 
@@ -108,7 +108,7 @@ massbal$chnge_lm <- -0.226*massbal$years + 446.6
 
 ### Takeaway
 
-Both of these graphs show increasing withdrawal of California groundwater (via increasing outflows), and decreasing replenishment of groundwater (via decreasing inflows). In **Figure 1**, input of groundwater (from precipitation, etc.) is projected to decrease by `r max(massbal$ins) - min(massbal$ins)` billion cubic meters, while output of groundwater (for irrigation, agriculture, industry, etc.) is projected to increase by `r max(massbal$outs) - min(massbal$outs)` billion cubic meters. This indicates that there will be a severe disparity between groundwater withdrawal and replenishment in 2025 of `r max(massbal$outs) - max(massbal$ins)` billion cubic meters. This is consistent with the projected change in groundwater flow depicted in **Figure 2**, where the difference between water replenishment (inflow) and withdrawal (outflow) becomes increasingly more negative as time goes on, dropping from `r max(massbal$chnge)` to `r min(massbal$chnge)`. The negative net flow indicates that we are losing groundwater and it is being pulled out of groundwater sources faster than they can be replenished. These trends suggest that there will likely be a serious deficit of groundwater if we continue business as usual.
+Both of these graphs show increasing discharge of California groundwater (via increasing outflows), and decreasing recharge of groundwater (via decreasing inflows). In **Figure 1**, input of groundwater (from precipitation, etc.) is projected to decrease by `r max(massbal$ins) - min(massbal$ins)` billion cubic meters, while output of groundwater (for irrigation, agriculture, industry, etc.) is projected to increase by `r max(massbal$outs) - min(massbal$outs)` billion cubic meters. This indicates that there will be a severe disparity between groundwater discharge and recharge in 2025 of `r max(massbal$outs) - max(massbal$ins)` billion cubic meters. This is consistent with the projected change in groundwater flow depicted in **Figure 2**, where the difference between water recharge (inflow) and discharge (outflow) becomes increasingly more negative as time goes on, dropping from `r max(massbal$chnge)` to `r min(massbal$chnge)`. The negative net flow indicates that we are losing groundwater and it is being pulled out of groundwater sources faster than they can be replenished. These trends suggest that there will likely be a serious deficit of groundwater if we continue business as usual.
 
 ## Visualizing changes in groundwater resources for three scenarios based on varying initial conditions of groundwater availability
 
@@ -133,11 +133,11 @@ massbal$gw_upp = massbal$w_lost + 550
 
 # example plot which we don't need to show - not the nicest
 ggplot(massbal) + 
-  geom_rect(aes(ymin=-Inf, ymax=0, xmin=2000, xmax=2050), alpha = 0.03, fill='firebrick4') +
+  geom_rect(aes(ymin=-Inf, ymax=0, xmin=2000, xmax=2050), alpha = 0.02, fill='firebrick') +
   geom_line(aes(x=years, y=gw_storage, col='Average')) +
   geom_line(aes(x=years, y=gw_low, col='Bounds'), linetype='dashed') + 
   geom_line(aes(x=years, y=gw_upp, col='Bounds'), linetype='dashed') +
-  scale_color_manual(values = c("blue3", "dodgerblue")) +
+  scale_color_manual(values = c("black", "blue3")) +
   xlab("Year") + 
   ylab(TeX("Groundwater storage ($10^9$ $m^3$)")) + 
   theme(legend.title = element_blank()) + 
