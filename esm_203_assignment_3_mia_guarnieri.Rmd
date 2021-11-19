@@ -95,7 +95,8 @@ massbal$chnge = massbal$ins - massbal$outs
 ggplot(massbal) + 
   geom_line(aes(x=years, y=chnge), color = "blue3") +
   xlab("Year") + 
-  ylab(TeX("Change in groundwater ($10^9$ $m^3$)"))
+  ylab(TeX("Change in groundwater ($10^9$ $m^3$)")) +
+  ggtitle("Net groundwater flow in California from 2000 to 2050")
 ```
 
 ```{r, results = FALSE}
