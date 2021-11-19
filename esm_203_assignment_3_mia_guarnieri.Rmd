@@ -103,7 +103,7 @@ lm_change_per_year <- lm(c(chng00, chng50) ~ year)
 massbal$chnge_lm <- -0.226*massbal$years + 446.6
 ```
 
-**Figure 2:** The predicted change in California groundwater flow (inflow of water - outflow of water) in 10$^9$ m$^3$ for the years 2000 to 2050. Net flow (y axis) is negative due to outflow being greater than inflow. Groundwater will decrease by `r lm_change_per_year$coefficients[2]*-10` 10$^9$ m$^3$ every ten years. Data: Curmi et al. 2013.
+**Figure 2:** The predicted change in California groundwater flow (inflow of water - outflow of water) in 10$^9$ m$^3$ for the years 2000 to 2050. Net flow (y axis) is negative due to outflow being greater than inflow. Net change in groundwater will decrease by `r lm_change_per_year$coefficients[2]*-10` 10$^9$ m$^3$ every ten years. Data: Curmi et al. 2013.
 
 ### Takeaway
 
@@ -159,9 +159,13 @@ The initial analysis done in this memo reveals:
 
 -   Input of water into California aquifers is predicted to continually decrease from 2000 to 2025, while output is predicted to continually increase. This will lead to an ever-increasing negative flow of groundwater, indicating an increasing deficit as water continues to be lost from groundwater sources without being replenished.
 
--   If Curmi et al.'s estimate of available groundwater is correct, we will hit zero groundwater storage between 2023 and 2024. If the available groundwater is higher (following the upper estimate), we will hit zero groundwater storage in 2050, and if it is lower (following the lower estimate), we will reach zero groundwater storage between 2023 and 2024.
+-   If Curmi et al.'s estimate of available groundwater is correct, we will hit zero groundwater storage between 2036 and 2037. If the available groundwater is higher (following the upper estimate), we will hit zero groundwater storage in 2050, and if it is lower (following the lower estimate), we will reach zero groundwater storage between 2023 and 2024.
 
-It is clear that action must be taken, preferably sooner rather than later, to reduce our usage of groundwater sources, increase the amount of water going toward replenishing these sources, or both. These initial investigations may appear grim, but there is still time to make crucial adjustments that can exted the longevity of these critical water sources so that they are available for future generations.
+Future analyses can incorporate additional adjustments in the predictive model, such as diverting water from non-essential uses like landscape irrigation to recharge groundwater sources (thus reducing discharge of groundwater while increasing recharge). Additional specific policy measures can also be incorporated into the model with different implementation dates, to assess their efficacy and determine appropriate timelines for implementation (near future, within the next decade, within the next 50 years, etc.).
+
+# Next steps
+
+It is clear that action must be taken, preferably sooner rather than later, to reduce our usage of groundwater sources, increase the amount of water going toward replenishing these sources, or both. These initial investigations may appear grim, but there is still time to make crucial adjustments that can extend the longevity of these critical water sources so that they are available for future generations.
 
 Some potential next steps we can take include:
 
