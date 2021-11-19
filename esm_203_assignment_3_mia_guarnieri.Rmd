@@ -20,13 +20,13 @@ This memo assesses the resilience of California groundwater stocks in the face o
 
 # Data 
 
-This memo utilizes estimates of California water flows for both 2000 and 2050 provided by Elizabeth Curmi and colleagues in their article "Visualising a Stochastic Model of Californian Water Resources Using Sankey Diagrams", published in Water Resources Management in 2013. Curmi and colleagues assessed cumulative groundwater use through two models: a baseline "business as usual" model, where no changes to water use are made, and a policy scenario in which there is a 20% reduction in average irrigated water use introduced in 2020 and a maximum water allowance of 31.6 × 10$^9$ m$^3$ for the agricultural sector.
+This memo utilizes estimates of California water flows for both 2000 and 2050 provided by Elizabeth Curmi and colleagues in their article "Visualising a Stochastic Model of Californian Water Resources Using Sankey Diagrams", published in Water Resources Management in 2013. Curmi and colleagues assessed cumulative groundwater use and future availability through two models: a baseline "business as usual" model, where no changes to water use are made, and a policy scenario in which there is a 20% reduction in average irrigated water use introduced in 2020 and a maximum water allowance of 31.6 × 10$^9$ m$^3$ for the agricultural sector. This memo will analyze predicted future groundwater availability following the "business as usual" model to examine what water resources will look like in California without further intervention. 
 
-From paper: 
-The median cumulative loss of groundwater stock from 2000 to 2050 is a staggering 530×109 m3 for the ‘BAU’ case and 450×109 m3 for the policy scenario. It is not known how much groundwater stock is actually available in the aquifers. 
+*Assumptions*
+For the 2050 estimates, population is estimated to increase to 55 million people (California Council of Science and Technology 2011), and the consequent increase in food demand is assumed to be met through imports. A policy to reduce urban per-capita water use by 2020 is also included as an assumption, due to California’s legislation in Chapter 4 of the Senate Bill No. 7. Finally, it is assumed that on average groundwater will continue to meet about 30% of California’s urban and agriculture water demand except in a dry year, when this percentage increases to more than 40 % (Department of Water Resources 2003) as there is insufficient surface water. 
 
-Estimates of usable storage capacity, which is defined as the amount of groundwater of suitable quality that can be economically withdrawn from storage, ranges from 180×109 m3 to 560×109 m3 (Department of Water Resources 2003); these are shown in Fig. 7a and b as the upper and lower red lines. There is uncertainty in the amount of groundwater stocks that will be extracted, due to the uncertainty in future precipitation (shown by the grey shaded area in Fig. 7a and b), and also to uncertainty in the usable storage capacity (red lines in Fig. 7a and b). However the diagrams clearly show that California should introduce a policy to limit groundwater use.
-
+*Uncertainties*
+The assumed parameters discussed above are uncertain, as future changes cannot be predicted with 100% accuracy. There is also uncertainty in the model about the amount of groundwater stocks that will be extracted, due to uncertainty about future precipitation and usable storage capacity. Uncertainty in future precipitation is considered explicitly in Cumi and colleagues' analysis, and in the estimates provided in this memo. 
 
 All analyses are in R version 4.1.1 using RStudio version 1.4.1717.
 
@@ -85,7 +85,7 @@ ggplot(massbal) +
   theme(legend.title = element_blank())
 ```
 
-**Figure 1:** A linear trend was fitted for input and output fluxes in California groundwater storage from 2000 to 2025. Input of groundwater (from precipitation, etc.) is projected to decrease by `r max(massbal$ins) - min(massbal$ins)` billion cubic meters, while output of groundwater (for irrigation, agriculture, industry, etc.) is projected to increase by `r max(massbal$outs) - min(massbal$outs)` billion cubic meters. This indicates that there will be a severe disparity between groundwater demand and availability in 2025 of `r max(massbal$outs) - max(massbal$ins)` billion cubic meters.
+**Figure 1:** A linear trend fitted for input and output fluxes in California groundwater storage from 2000 to 2025. 
 
 ```{r}
 # can do mass balance for each year to see the changes 
@@ -99,13 +99,16 @@ ggplot(massbal) +
 lm(c(chng00, chng50) ~ year)
 massbal$chnge_lm <- -0.226*massbal$years + 446.6
 ```
-**Figure 2:** This graph shows the change in California groundwater flux (inflow of water - outflow of water) for the years 2000 to 2050. The difference between water availability (inflow) and demand (outflow) becomes increasingly more negative as time goes on, dropping from `r max(massbal$chnge)` to `r min(massbal$chnge)`. This indicates a potential water deficit and overuse of groundwater.
+**Figure 2:** This graph shows the change in California groundwater flux (inflow of water - outflow of water) for the years 2000 to 2050. 
 
+### Takeaway
+
+Both of these graphs show an increasing demand for California groundwater (via increasing outflows), and a decreasing availability of groundwater (via decreasing inflows). In **Figure 1**, input of groundwater (from precipitation, etc.) is projected to decrease by `r max(massbal$ins) - min(massbal$ins)` billion cubic meters, while output of groundwater (for irrigation, agriculture, industry, etc.) is projected to increase by `r max(massbal$outs) - min(massbal$outs)` billion cubic meters. This indicates that there will be a severe disparity between groundwater demand and availability in 2025 of `r max(massbal$outs) - max(massbal$ins)` billion cubic meters. This is consistent with the projected change in groundwater flux depicted in **Figure 2**, where difference between water availability (inflow) and demand (outflow) becomes increasingly more negative as time goes on, dropping from `r max(massbal$chnge)` to `r min(massbal$chnge)`. These trends suggest that there will likely be a serious deficit of groundwater if we continue business as usual.
 
 ## Visualizing changes in groundwater resources for three scenarios based on varying initial conditions of groundwater availability
 
 
-This graph visualizes the change in groundwater resources based on three initial conditions for groundwater availability: low, average, and high. Curmi and colleagues estimated that the expected value of groundwater resources in 2000 was 350 x 10$^9$ m$^3$, with a standard deviation of 115 x $10^$ m$^3$. Based on a normal distribution with this mean and standard deviation, there is a 90% chance that the actual amount of groundwater in CA is somewhere between a lower limit of 190 x $10^9$ m$^3$ and an upper limit of 550 x 10$^9$ m$^3$.
+This graph visualizes the change in groundwater resources based on three initial conditions for groundwater availability: low, estimated, and high. Curmi and colleagues estimated that the expected value of groundwater resources in 2000 was 350 x 10$^9$ m$^3$, with a standard deviation of 115 x $10^$ m$^3$. Based on a normal distribution with this mean and standard deviation, there is a 90% chance that the actual amount of groundwater in CA is somewhere between a lower limit of 190 x $10^9$ m$^3$ and an upper limit of 550 x 10$^9$ m$^3$.
 
 ```{r scenarios}
 # all of the flows were also 10^9, so there is no need for unit conversions
@@ -121,8 +124,6 @@ massbal$w_lost <- sapply(massbal$years, water_lost)
 massbal$gw_storage = massbal$w_lost + 350
 massbal$gw_low = massbal$w_lost + 190
 massbal$gw_upp = massbal$w_lost + 550
-
-head(massbal)
 
 ```
 
@@ -143,11 +144,14 @@ ggplot(massbal) +
 
 ```
 
+**Figure 3:** This graph shows groundwater storage (10$^9$ m$^3$) from 2000 to 2050 under three conditions for groundwater availability: low (lower dashed line, 190 x $10^9$ m$^3$), estimated (middle solid line, 350 x 10$^9$ m$^3$), and high (upper dashed line, 550 x 10$^9$ m$^3$).
 
 # Takeaway
 
-Most extracted groundwater is used for agricultural purposes, whilst most surface water either flows in rivers, or is pumped to reservoirs and wetlands to maintain ecosystem services or is delivered to farmers for irrigation. (Curmi et al. 2013)
+
 
 # Summary
+
+Most extracted groundwater is used for agricultural purposes, whilst most surface water either flows in rivers, or is pumped to reservoirs and wetlands to maintain ecosystem services or is delivered to farmers for irrigation. (Curmi et al. 2013)
 
 # Citation
