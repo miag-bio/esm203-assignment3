@@ -107,8 +107,7 @@ Both of these graphs show an increasing demand for California groundwater (via i
 
 ## Visualizing changes in groundwater resources for three scenarios based on varying initial conditions of groundwater availability
 
-
-This graph visualizes the change in groundwater resources based on three initial conditions for groundwater availability: low, estimated, and high. Curmi and colleagues estimated that the expected value of groundwater resources in 2000 was 350 x 10$^9$ m$^3$, with a standard deviation of 115 x $10^$ m$^3$. Based on a normal distribution with this mean and standard deviation, there is a 90% chance that the actual amount of groundwater in CA is somewhere between a lower limit of 190 x $10^9$ m$^3$ and an upper limit of 550 x 10$^9$ m$^3$.
+This graph visualizes the change in groundwater resources based on three initial conditions for groundwater availability: low, expected, and high. Curmi and colleagues estimated that the expected value of groundwater resources in 2000 was 350 x 10$^9$ m$^3$, with a standard deviation of 115 x $10^$ m$^3$. Based on a normal distribution with this mean and standard deviation, there is a 90% chance that the actual amount of groundwater in CA is somewhere between a lower limit of 190 x $10^9$ m$^3$ and an upper limit of 550 x 10$^9$ m$^3$.
 
 ```{r scenarios}
 # all of the flows were also 10^9, so there is no need for unit conversions
@@ -125,9 +124,6 @@ massbal$gw_storage = massbal$w_lost + 350
 massbal$gw_low = massbal$w_lost + 190
 massbal$gw_upp = massbal$w_lost + 550
 
-```
-
-```{r plot}
 # use ggplot here to create a beautiful plot to include
 
 # example plot which we don't need to show - not the nicest
@@ -138,18 +134,18 @@ ggplot(massbal) +
   geom_line(aes(x=years, y=gw_upp, col='Bounds'), linetype='dashed') +
   scale_color_manual(values = c("blue3", "dodgerblue")) +
   xlab("Year") + 
-  ylab(TeX("Groundwater stoarge ($10^9$ $m^3$)")) + 
+  ylab(TeX("Groundwater storage ($10^9$ $m^3$)")) + 
   theme(legend.title = element_blank()) + 
   ggtitle("Projected groundwater under business as usual with 90% confidence interval")
   
 
 ```
 
-**Figure 3:** This graph shows groundwater storage (10$^9$ m$^3$) from 2000 to 2050 under three conditions for groundwater availability: low (lower dashed line, 190 x $10^9$ m$^3$), estimated (middle solid line, 350 x 10$^9$ m$^3$), and high (upper dashed line, 550 x 10$^9$ m$^3$).
+**Figure 3:** This graph shows groundwater storage (10$^9$ m$^3$) from 2000 to 2050 under three conditions for groundwater availability: low (lower dashed line, 190 x $10^9$ m$^3$), expected (middle solid line, 350 x 10$^9$ m$^3$), and high (upper dashed line, 550 x 10$^9$ m$^3$). Groundwater storage at or below zero is shaded in red.
 
 # Takeaway
 
-test
+Based on the model predictions, if the initial expected estimate of groundwater availability is correct, we will reach zero groundwater storage between 2036 and 2037. If initial groundwater availability is high, we will reach zero groundwater storage in 2050. If initial groundwater availability is low 
 
 # Summary
 
