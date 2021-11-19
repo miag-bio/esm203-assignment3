@@ -103,7 +103,7 @@ lm_change_per_year <- lm(c(chng00, chng50) ~ year)
 massbal$chnge_lm <- -0.226*massbal$years + 446.6
 ```
 
-**Figure 2:** The predicted change in California groundwater flow (inflow of water - outflow of water) in 10$^9$ m$^3$ for the years 2000 to 2050. Net flow (y axis) is negative due to outflow being greater than inflow. Net change in groundwater will decrease by `r lm_change_per_year$coefficients[2]*-10` 10$^9$ m$^3$ every ten years. Data: Curmi et al. 2013.
+**Figure 2:** The predicted change in California groundwater flow (inflow of water - outflow of water) in 10$^9$ m$^3$ for the years 2000 to 2050. Net flow (y axis) is negative due to outflow being greater than inflow. Net flow of groundwater will decrease by `r lm_change_per_year$coefficients[2]*-10` 10$^9$ m$^3$ every ten years. Data: Curmi et al. 2013.
 
 ### Takeaway
 
