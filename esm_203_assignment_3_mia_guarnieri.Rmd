@@ -24,7 +24,7 @@ This memo utilizes estimates of California water flows for both 2000 and 2050 pr
 
 *Assumptions*
 
-For the 2050 estimates, population is estimated to increase to 55 million people (California Council of Science and Technology 2011), and the consequent increase in food demand is assumed to be met through imports. A policy to reduce urban per-capita water use by 2020 is also included as an assumption, due to California's legislation in Chapter 4 of the Senate Bill No. 7. Finally, it is assumed that on average groundwater will continue to meet about 30% of California's urban and agriculture water demand except in a dry year, when this percentage increases to more than 40 % (Department of Water Resources 2003) as there is insufficient surface water.
+For the 2050 estimates, the human population is estimated to increase to 55 million people, and the resulting increase in food demand is assumed to be met through imports. A policy to reduce urban per-capita water use by 2020 is also included as an assumption, due to California's legislation in Chapter 4 of the Senate Bill No. 7. Finally, it is assumed that on average groundwater will continue to meet about 30% of California's urban and agriculture water demand except in a dry year, when this percentage increases to more than 40%. Both models also adjust for differences in snowpack and timing of snowmelt due to climate change.
 
 *Uncertainties*
 
