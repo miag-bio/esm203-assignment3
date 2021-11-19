@@ -132,10 +132,11 @@ massbal$gw_upp = massbal$w_lost + 550
 
 # example plot which we don't need to show - not the nicest
 ggplot(massbal) + 
-  geom_rect(aes(ymin=-Inf, ymax=0, xmin=2000, xmax=2050), alpha = 0.02, fill='red') +
+  geom_rect(aes(ymin=-Inf, ymax=0, xmin=2000, xmax=2050), alpha = 0.03, fill='firebrick4') +
   geom_line(aes(x=years, y=gw_storage, col='Average')) +
   geom_line(aes(x=years, y=gw_low, col='Bounds'), linetype='dashed') + 
   geom_line(aes(x=years, y=gw_upp, col='Bounds'), linetype='dashed') +
+  scale_color_manual(values = c("blue3", "dodgerblue")) +
   xlab("Year") + 
   ylab(TeX("Groundwater stoarge ($10^9$ $m^3$)")) + 
   theme(legend.title = element_blank()) + 
